@@ -7,6 +7,9 @@ import { inject, injectable } from 'inversify';
 import { DependencyIdentifier } from '../../../DependencyIdentifiers';
 import { IConfig } from '../../Config/interfaces/IConfig';
 
+/**
+ * Car on sale client implementation
+ */
 @injectable()
 export class CarOnSaleClient implements ICarOnSaleClient {
     private authInfo: IAuthenticationInfo;
