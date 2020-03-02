@@ -1,15 +1,15 @@
-import { IAuctionAggregator } from '../interfaces/IAuctionAggregator';
-import { inject, injectable } from 'inversify';
-import { DependencyIdentifier } from '../../../DependencyIdentifiers';
-import { ICarOnSaleClient } from '../../CarOnSaleClient/interface/ICarOnSaleClient';
-import { IAuctionAggregatedInfo } from '../interfaces/IAuctionAggregatedInfo';
+import { IAuctionAggregator } from "../interfaces/IAuctionAggregator";
+import { inject, injectable } from "inversify";
+import { DependencyIdentifier } from "../../../DependencyIdentifiers";
+import { ICarOnSaleClient } from "../../CarOnSaleClient/interface/ICarOnSaleClient";
+import { IAuctionAggregatedInfo } from "../interfaces/IAuctionAggregatedInfo";
 
 /**
  * Auction aggregator implementation
  */
 @injectable()
 export class AuctionAggregator implements IAuctionAggregator {
-    public constructor(@inject(DependencyIdentifier.CARONSALECLIENT) private carOnSaleClient: ICarOnSaleClient) {
+    public constructor(@inject(DependencyIdentifier.CAR_ON_SALE_CLIENT) private carOnSaleClient: ICarOnSaleClient) {
     }
     public async getAuctionAggregatedInfo(): Promise<IAuctionAggregatedInfo> {
         const auctions = await this.carOnSaleClient.getRunningAuctions();

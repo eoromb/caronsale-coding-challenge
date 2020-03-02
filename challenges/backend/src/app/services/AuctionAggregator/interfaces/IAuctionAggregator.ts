@@ -1,4 +1,4 @@
-import { IAuctionAggregatedInfo } from './IAuctionAggregatedInfo';
+import { IAuctionAggregatedInfo } from "./IAuctionAggregatedInfo";
 
 /**
  * Auction aggregator interface

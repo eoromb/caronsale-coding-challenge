@@ -1,11 +1,12 @@
-import { ICarOnSaleClient } from '../interface/ICarOnSaleClient';
-import { IAuction } from '../interface/IAuction';
-import * as superagent from 'superagent';
-import { PasswordHash } from './PasswordHash';
-import { IAuthenticationInfo } from '../interface/IAuthenticationInfo';
-import { inject, injectable } from 'inversify';
-import { DependencyIdentifier } from '../../../DependencyIdentifiers';
-import { IConfig } from '../../Config/interfaces/IConfig';
+import { ICarOnSaleClient } from "../interface/ICarOnSaleClient";
+import { IAuction } from "../interface/IAuction";
+import * as superagent from "superagent";
+import { PasswordHash } from "./PasswordHash";
+import { IAuthenticationInfo } from "../interface/IAuthenticationInfo";
+import { inject, injectable } from "inversify";
+import { DependencyIdentifier } from "../../../DependencyIdentifiers";
+import { IConfig } from "../../Config/interfaces/IConfig";
+import { AuctionMapper } from "./AuctionMapper";
 
 /**
  * Car on sale client implementation
@@ -19,14 +20,14 @@ export class CarOnSaleClient implements ICarOnSaleClient {
         await this.authenticate();
         const auctionResult = await this.setHeaders(
             superagent
-                .get(`${this.config.getBaseUrl()}/v1/auction/salesman/${this.authInfo.userId}/_all`)
+                .get(`${this.config.getBaseUrl()}/v1/auction/salesman/${this.authInfo.userId}/_all`),
         );
-        return auctionResult.body;
+        return AuctionMapper.mapHttpAuctionsToModels(auctionResult.body);
     }
     private setHeaders(req: superagent.SuperAgentRequest): superagent.SuperAgentRequest {
         return req
-            .set('userid', this.authInfo.userId)
-            .set('authtoken', this.authInfo.token);
+            .set("userid", this.authInfo.userId)
+            .set("authtoken", this.authInfo.token);
     }
     private async authenticate(): Promise<IAuthenticationInfo> {
         if (this.authInfo != null) {

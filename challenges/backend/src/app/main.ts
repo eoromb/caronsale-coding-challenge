@@ -22,8 +22,8 @@ const container = new Container({
  */
 container.bind<ILogger>(DependencyIdentifier.LOGGER).to(Logger);
 container.bind<IConfig>(DependencyIdentifier.CONFIG).to(Config);
-container.bind<ICarOnSaleClient>(DependencyIdentifier.CARONSALECLIENT).to(CarOnSaleClient);
-container.bind<IAuctionAggregator>(DependencyIdentifier.AUCTIONAGGREGATOR).to(AuctionAggregator);
+container.bind<ICarOnSaleClient>(DependencyIdentifier.CAR_ON_SALE_CLIENT).to(CarOnSaleClient);
+container.bind<IAuctionAggregator>(DependencyIdentifier.AUCTION_AGGREGATOR).to(AuctionAggregator);
 
 /*
  * Inject all dependencies in the application & retrieve application instance.

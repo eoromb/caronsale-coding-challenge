@@ -3,7 +3,7 @@
  */
 export const DependencyIdentifier = {
     LOGGER: "logger",
-    CARONSALECLIENT: "carOnSaleClient",
+    CAR_ON_SALE_CLIENT: "carOnSaleClient",
     CONFIG: "config",
-    AUCTIONAGGREGATOR: "auctionAggregator",
+    AUCTION_AGGREGATOR: "auctionAggregator",
 };
