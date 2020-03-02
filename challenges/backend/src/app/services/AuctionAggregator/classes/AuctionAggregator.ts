@@ -10,6 +10,9 @@ import { IAuction } from "../../CarOnSaleClient/interface/IAuction";
  */
 @injectable()
 export class AuctionAggregator implements IAuctionAggregator {
+    /**
+     * Gets percentage of auction progress
+     */
     public static getPercentageOfAuctionProgress(auction: IAuction): number {
         return auction.minimumRequiredAsk !== 0 ?
             (auction.currentHighestBidValue / auction.minimumRequiredAsk) :
@@ -18,8 +21,21 @@ export class AuctionAggregator implements IAuctionAggregator {
     }
     public constructor(@inject(DependencyIdentifier.CAR_ON_SALE_CLIENT) private carOnSaleClient: ICarOnSaleClient) {
     }
+    /**
+     * Gets auctions aggregated information
+     */
     public async getAuctionAggregatedInfo(): Promise<IAuctionAggregatedInfo> {
         const auctions = await this.carOnSaleClient.getRunningAuctions();
+        if (!Array.isArray(auctions)) {
+            throw new Error("auctions must be array");
+        }
+        if (auctions.length === 0) {
+            return {
+                numberOfAuctions: 0,
+                avgNumBids: 0,
+                avgPercentageOfAuctionProgress: 0,
+            };
+        }
         let numBidsTotal = 0;
         let percentageOfAuctionProgressTotal = 0;
         for (const auction of auctions) {

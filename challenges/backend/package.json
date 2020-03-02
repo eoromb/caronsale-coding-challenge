@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "start": "./node_modules/.bin/ts-node src/app/main.ts",
-    "test": "./node_modules/.bin/mocha --compilers ts:ts-node/register ./src/**/*.spec.ts"
+    "test": "./node_modules/.bin/mocha --compilers ts:ts-node/register ./src/**/*.spec.ts",
+    "lint": "./node_modules/.bin/tslint --project ."
   },
   "author": "Evgenii Romb",
   "license": "ISC",
@@ -22,6 +23,7 @@
   "devDependencies": {
     "@types/mocha": "^7.0.1",
     "chai": "^4.2.0",
-    "mocha": "^5.2.0"
+    "mocha": "^5.2.0",
+    "tslint": "^6.0.0"
   }
 }

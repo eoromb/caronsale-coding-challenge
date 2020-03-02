@@ -16,6 +16,9 @@ export class CarOnSaleClient implements ICarOnSaleClient {
     private authInfo: IAuthenticationInfo;
     public constructor(@inject(DependencyIdentifier.CONFIG) private config: IConfig) {
     }
+    /**
+     * Gets array of running auctions
+     */
     public async getRunningAuctions(): Promise<IAuction[]> {
         await this.authenticate();
         const auctionResult = await this.setHeaders(
@@ -24,11 +27,17 @@ export class CarOnSaleClient implements ICarOnSaleClient {
         );
         return AuctionMapper.mapHttpAuctionsToModels(auctionResult.body);
     }
+    /**
+     * Sets authorization headers
+     */
     private setHeaders(req: superagent.SuperAgentRequest): superagent.SuperAgentRequest {
         return req
             .set("userid", this.authInfo.userId)
             .set("authtoken", this.authInfo.token);
     }
+    /**
+     * Make authentication
+     */
     private async authenticate(): Promise<IAuthenticationInfo> {
         if (this.authInfo != null) {
             return this.authInfo;

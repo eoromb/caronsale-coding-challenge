@@ -68,4 +68,13 @@ describe("AuctionAggregator test", () => {
     it("should get average percentage of auction progress equal 0 if minimumRequiredAsk is 0 and auction has no bids", async () => {
         expect(AuctionAggregator.getPercentageOfAuctionProgress(auctionWithZeroMinimumRequiredAskHasNoBids)).to.be.equal(0);
     });
+    it("should returns aggregation info equal to zero in case of no actions", async () => {
+        const carOnSaleFake = createCarOnSaleFake([]);
+        container.bind<ICarOnSaleClient>(DependencyIdentifier.CAR_ON_SALE_CLIENT).toConstantValue(carOnSaleFake);
+        const auctionAggregator = container.resolve(AuctionAggregator);
+        const result = await auctionAggregator.getAuctionAggregatedInfo();
+        expect(result.numberOfAuctions).to.be.equal(0);
+        expect(result.avgNumBids).to.be.equal(0);
+        expect(result.avgPercentageOfAuctionProgress).to.be.equal(0);
+    });
 });
