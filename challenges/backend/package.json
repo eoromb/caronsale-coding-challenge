@@ -7,7 +7,7 @@
     "start": "./node_modules/.bin/ts-node src/app/main.ts",
     "test": "./node_modules/.bin/mocha --compilers ts:ts-node/register ./src/**/*.spec.ts"
   },
-  "author": "",
+  "author": "Evgenii Romb",
   "license": "ISC",
   "dependencies": {
     "@types/inversify": "^2.0.33",
